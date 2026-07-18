@@ -14,12 +14,12 @@ from dotenv import load_dotenv
 from groq import Groq
 from sentence_transformers import SentenceTransformer
 
-from dataLoader import load_documents, load_selected_arxivs, search_arxiv, load_web_urls
-from chunking import Chunker
-from embedding import Embedder
-from vector_store import QDrantStore
-from query import QueryProcessor
-from generator import Generator
+from src.dataLoader import load_documents, load_selected_arxivs, search_arxiv, load_web_urls
+from src.chunking import Chunker
+from src.embedding import Embedder
+from src.vector_store import QDrantStore
+from src.query import QueryProcessor
+from src.generator import Generator
 
 ENV_PATH = Path(__file__).resolve().parent.parent.parent / '.env'
 load_dotenv(dotenv_path=ENV_PATH)
