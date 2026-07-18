@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Upload, ArrowUp, Filter, FileText, Globe, BookOpen, X } from 'lucide-react';
+import {API_BASE_URL} from '../config';
 
 export default function App() {
     // State management
@@ -45,7 +46,7 @@ export default function App() {
             console.log("2. checkStatus function is executing...");
             try {
                 console.log("📡 3. Attempting to fetch from backend...");
-                const res = await fetch("http://127.0.0.1:8000/api/status");
+                const res = await fetch(`${API_BASE_URL}/api/status`);
 
                 console.log("4. Fetch response received. Status code:", res.status);
                 if (res.ok) {
@@ -114,7 +115,7 @@ export default function App() {
         }
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/upload", {
+            const response = await fetch(`${API_BASE_URL}/api/upload`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${import.meta.env.VITE_API_TOKEN}`
@@ -155,7 +156,7 @@ export default function App() {
         setUploadStatus("Scraping and processing URL...");
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/url/load", {
+            const response = await fetch(`${API_BASE_URL}/api/url/load`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -183,7 +184,7 @@ export default function App() {
         
         setUploadStatus("Searching Arxiv...");
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/arxiv/search", {
+            const response = await fetch(`${API_BASE_URL}/api/arxiv/search`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -206,7 +207,7 @@ export default function App() {
         setUploadStatus(`Downloading and processing ${paperId}...`);
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/arxiv/load", {
+            const response = await fetch(`${API_BASE_URL}/api/arxiv/load`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -246,7 +247,7 @@ export default function App() {
             .join("\n")
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/chat", {
+            const response = await fetch(`${API_BASE_URL}/api/chat`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
