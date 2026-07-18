@@ -101,8 +101,8 @@ def verify_api_token(credentials: HTTPAuthorizationCredentials = Security(securi
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5173", "http://localhost:5173"],  # Adjust this in production for security
-    allow_credentials=True,
+    allow_origins=["*"],  # Adjust this in production for security
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
