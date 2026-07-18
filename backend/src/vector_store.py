@@ -1,4 +1,5 @@
 import uuid
+import os
 from typing import List, Dict, Any
 
 from qdrant_client import QdrantClient
@@ -10,8 +11,18 @@ from fastembed import SparseTextEmbedding
 class QDrantStore:
     def __init__(self, persist_dir:str = '../db', collection_name:str="docs", vector_size:int = 384):
         print(f"[DEBUG] Initializing QDrant Vector Database at {persist_dir}")
+        self.qdrant_url = os.getenv("QDRANT_URL")
+        self.qdrant_api_key = os.getenv("QDRANT_API_KEY")
 
-        self.client = QdrantClient(path=persist_dir)
+        if self.qdrant_url and self.qdrant_api_key:
+            print("Connecting to Qdrant Cloud...")
+            self.client = QdrantClient(url=self.qdrant_url, api_key=self.qdrant_api_key)
+        else:
+            # Fallback for local development
+            persist_dir = './db'
+            print(f"Connecting to Local Qdrant at {persist_dir}")
+            self.client = QdrantClient(path=persist_dir)
+            
         self.collection_name = collection_name
 
         print("[DEBUG] Loading BM25 Sparse model....")
