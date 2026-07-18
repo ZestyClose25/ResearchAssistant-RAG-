@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  html {
+    @apply text-base antialiased;
+  }
+
+  body {
+    @apply bg-slate-900 text-slate-200 font-sans overflow-hidden;
+    color-scheme: dark;
+  }
+
+  #root {
+    @apply w-full h-screen;
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-600 rounded-lg hover:bg-slate-500;
+  }
+}
+
+@layer components {
+  /* Smooth transitions */
+  button, input, textarea, select {
+    @apply transition-all duration-200;
+  }
+
+  /* Focus states */
+  input:focus, textarea:focus, select:focus {
+    @apply outline-none;
+  }
+}
+
